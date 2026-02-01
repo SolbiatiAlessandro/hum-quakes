@@ -14,14 +14,20 @@ Determine whether there is a detectable regime change in seismic activity before
 
 | Phase | Notebook | Purpose |
 | --- | --- | --- |
-| 0 | `norcia_phase0_explore.ipynb` | Load INSTANCE metadata, filter to Norcia, summarize, and save `norcia_events.parquet`. |
+| 0 | `norcia_phase0_explore.ipynb` | Load `norcia_2016_metadata.parquet`, summarize, and save `norcia_events.parquet`. |
 | 1 | `norcia_phase1_windows.ipynb` | Define pre-event/background/post-event windows and export `windows.csv`. |
+
+---
+
+## Input Data
+
+`norcia_2016_metadata.parquet` is the pre-filtered metadata table for the Norcia 2016 sequence (derived from INSTANCE metadata). It should live alongside the notebooks and is the default input for Phase 0 and an accepted input for Phase 1 if Phase 0 has not been run.
 
 ---
 
 ## Implementation Plan (Phase 0 → Phase 1)
 
-1. **Phase 0 notebook:** Load `instance_metadata.csv`, validate key columns, filter to the Norcia region/time window, summarize counts and magnitudes, and save `norcia_events.parquet` for reuse.
+1. **Phase 0 notebook:** Load `norcia_2016_metadata.parquet`, validate key columns, filter to the Norcia region/time window (if needed), summarize counts and magnitudes, and save `norcia_events.parquet` for reuse.
 2. **Windowing draft:** Enumerate pre-event, background, and post-event window definitions for each mainshock (2h/6h/12h/24h horizons), and ensure non-overlap rules are explicit.
 3. **Data checklist:** Record required columns and any missing fields from metadata; document fallbacks (e.g., skip waveform-derived stats if absent).
 4. **Plot review:** Verify that timeline and spatial plots look reasonable (e.g., elevated counts around mainshocks, locations inside bounding box).
