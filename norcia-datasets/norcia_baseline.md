@@ -104,6 +104,30 @@ This is the most important design decision.
 
 ---
 
+## Implementation Plan (Phases 2–3)
+
+1. **Prepare inputs**
+   - Ensure `norcia_events.parquet` (or CSV) and `windows.csv` exist from Phases 0–1.
+   - Confirm `windows.csv` has `start_time`/`end_time` in ISO 8601 UTC format.
+2. **Run Phase 2 feature aggregation**
+   - Use `norcia_phase2.ipynb` to compute per-window features from metadata.
+   - Output: `norcia_outputs/features.csv`.
+3. **Run Phase 3 baseline analysis**
+   - Use `norcia_phase3.ipynb` to compute distribution stats, seismic scores, and summary.
+   - Outputs:
+     - `norcia_outputs/feature_stats.csv` (p-values, effect sizes)
+     - `norcia_outputs/seismic_scores.csv` (per-window scores)
+     - `norcia_outputs/phase3_summary.md` (AUC + top features)
+4. **Iterate**
+   - Adjust the `score_config` cell in `norcia_phase3.ipynb` to test alternative scoring options.
+   - Re-run to compare AUC and feature significance.
+
+Example usage:
+- Run `norcia_phase2.ipynb` to generate `norcia_outputs/features.csv`.
+- Run `norcia_phase3.ipynb` to generate analysis outputs from the Phase 2 features.
+
+---
+
 ## Phase 2: Compute Features Per Window
 
 **Objective**: For each time window, compute aggregate seismic features from all events within that window.
