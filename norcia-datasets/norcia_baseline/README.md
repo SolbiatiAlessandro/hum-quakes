@@ -10,6 +10,25 @@ Determine whether there is a detectable regime change in seismic activity before
 
 ---
 
+## Notebooks
+
+| Phase | Notebook | Purpose |
+| --- | --- | --- |
+| 0 | `norcia_phase0_explore.ipynb` | Load INSTANCE metadata, filter to Norcia, summarize, and save `norcia_events.parquet`. |
+| 1 | `norcia_phase1_windows.ipynb` | Define pre-event/background/post-event windows and export `windows.csv`. |
+
+---
+
+## Implementation Plan (Phase 0 → Phase 1)
+
+1. **Phase 0 notebook:** Load `instance_metadata.csv`, validate key columns, filter to the Norcia region/time window, summarize counts and magnitudes, and save `norcia_events.parquet` for reuse.
+2. **Windowing draft:** Enumerate pre-event, background, and post-event window definitions for each mainshock (2h/6h/12h/24h horizons), and ensure non-overlap rules are explicit.
+3. **Data checklist:** Record required columns and any missing fields from metadata; document fallbacks (e.g., skip waveform-derived stats if absent).
+4. **Plot review:** Verify that timeline and spatial plots look reasonable (e.g., elevated counts around mainshocks, locations inside bounding box).
+5. **Readiness gate:** Proceed to Phase 1 once the parquet is saved and summary stats match expectations (event counts, magnitude ranges).
+
+---
+
 ## Approach: Anomaly Detection (Not Forecasting)
 
 We are NOT building an earthquake predictor. We are building a **regime change detector** that asks: "Does this time window look different from normal?"
