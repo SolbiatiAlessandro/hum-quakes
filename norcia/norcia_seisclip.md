@@ -83,15 +83,9 @@ Overview
 
      3.2 Anomaly Detection Analysis
 
-     Compare three approaches:
-     1. Catalog baseline: Using hand-crafted features from INGV catalog
-       - Features: event_rate, max_magnitude, cumulative_moment, b-value
-       - Expected AUC: 0.6-0.7
      2. SeisClip embeddings: Using pretrained representations
        - Features: mean/std/max of embeddings per window
        - Compare AUC with catalog baseline
-     3. Combined approach: Concatenate catalog + SeisClip features
-       - Test if multimodal adds value
 
      3.3 Evaluation Metrics
 
@@ -103,7 +97,6 @@ Overview
 
      Implementation Steps (Ordered)
 
-     1. Enable internet and search for SeisClip GitHub repository
      2. Download SeisClip checkpoint and documentation
      3. Set up Python environment with dependencies
      4. Download INSTANCE waveforms for Norcia region (or use FDSN service)
@@ -112,8 +105,6 @@ Overview
      7. Define time windows (pre-event, background, post-event)
      8. Extract SeisClip embeddings for all windows
      9. Train simple classifier (logistic regression on embeddings)
-     10. Evaluate and compare with catalog baseline
-     11. Document results and prepare for animal data integration
 
      Expected Outcomes
 
